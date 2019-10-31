@@ -11,8 +11,13 @@ import (
 	"strings"
 )
 
-// Writer is the default writer for Print statements.
-var Writer = os.Stdout
+var (
+	// Disable output of ansi color codes
+	// if this is set to true.
+	Disable = false
+	// Writer is the default writer for Print statements.
+	Writer io.Writer = os.Stdout
+)
 
 type (
 	// Color represents a specific color
@@ -133,6 +138,10 @@ func (c Colors) Sprintf(format string, args ...interface{}) string {
 }
 
 func surround(s string, colors ...Color) string {
+	if Disable {
+		return s
+	}
+
 	// Clear any resets that we have inside this string
 	// as they will mangle the colors we're about to surround with
 	newColor := ansiEscape(colors...)
