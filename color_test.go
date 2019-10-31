@@ -88,6 +88,16 @@ func TestColors(t *testing.T) {
 		),
 	)
 
+	// Test clean
+	fmt.Fprintln(writer,
+		Clean(
+			FgBrightGreen.Sprintf("strip %s colors from %s should work",
+				Mix(FgBlue, BgRed).Sprint("all"),
+				BgDefault.Sprint("strings"),
+			),
+		),
+	)
+
 	got := writer.Bytes()
 	t.Log("\n" + string(got))
 

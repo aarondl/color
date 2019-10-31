@@ -5,3 +5,4 @@
 [30;40mfgbg[0m [31;41mfgbg[0m [32;42mfgbg[0m [33;43mfgbg[0m [34;44mfgbg[0m [35;45mfgbg[0m [36;46mfgbg[0m [37;47mfgbg[0m
 [31mred [39mnone[0m[31m red[0m
 [91mketchup [103mmustard[0m[91m ketchup[0m
+strip all colors from strings should work

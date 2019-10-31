@@ -32,7 +32,9 @@ type (
 	}
 )
 
-var rgxResetters = regexp.MustCompile("\x1B\\[(?:0|39|39;49)m")
+var (
+	rgxCodes = regexp.MustCompile("\x1B" + `\[\d+(?:;\d+)?m`)
+)
 
 // Mix colors together
 func Mix(colors ...Color) Colors {
@@ -135,6 +137,11 @@ func (c Colors) Sprint(args ...interface{}) string {
 // Sprintf prints a formatted string
 func (c Colors) Sprintf(format string, args ...interface{}) string {
 	return surround(fmt.Sprintf(format, args...), c...)
+}
+
+// Clean all color codes from a string
+func Clean(s string) string {
+	return rgxCodes.ReplaceAllString(s, "")
 }
 
 func surround(s string, colors ...Color) string {
